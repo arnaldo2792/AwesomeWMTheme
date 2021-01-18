@@ -10,17 +10,11 @@ local apps = require('configuration.apps')
 local globalKeys =
   awful.util.table.join(
   -- Hotkeys
-  awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'show help', group = 'awesome'}),
-  -- Tag browsing
-  awful.key({modkey}, 'w', awful.tag.viewprev, {description = 'view previous', group = 'tag'}),
-  awful.key({modkey}, 's', awful.tag.viewnext, {description = 'view next', group = 'tag'}),
-  awful.key({altkey, 'Control'}, 'Up', awful.tag.viewprev, {description = 'view previous', group = 'tag'}),
-  awful.key({altkey, 'Control'}, 'Down', awful.tag.viewnext, {description = 'view next', group = 'tag'}),
-  awful.key({modkey}, 'Escape', awful.tag.history.restore, {description = 'go back', group = 'tag'}),
+  awful.key({modkey}, 'a', hotkeys_popup.show_help, {description = 'show help', group = 'awesome'}),
   -- Default client focus
   awful.key(
     {modkey},
-    'd',
+    'l',
     function()
       awful.client.focus.byidx(1)
     end,
@@ -28,7 +22,7 @@ local globalKeys =
   ),
   awful.key(
     {modkey},
-    'a',
+    'h',
     function()
       awful.client.focus.byidx(-1)
     end,
@@ -77,7 +71,7 @@ local globalKeys =
   ),
   -- Programms
   awful.key(
-    {modkey},
+    {'Control'},
     'l',
     function()
       awful.spawn(apps.default.lock)
@@ -123,15 +117,6 @@ local globalKeys =
       awful.util.spawn(apps.default.browser)
     end,
     {description = 'open a browser', group = 'launcher'}
-  ),
-  -- Open private browser/brave
-  awful.key(
-    {modkey},
-    'p',
-    function()
-      awful.util.spawn_with_shell('brave-browser')
-    end,
-    {description = 'Open Brave', group = 'launcher'}
   ),
   -- Standard program
   awful.key(
@@ -209,22 +194,6 @@ local globalKeys =
     {description = 'decrease the number of columns', group = 'layout'}
   ),
   awful.key(
-    {modkey},
-    'space',
-    function()
-      awful.layout.inc(1)
-    end,
-    {description = 'select next', group = 'layout'}
-  ),
-  awful.key(
-    {modkey, 'Shift'},
-    'space',
-    function()
-      awful.layout.inc(-1)
-    end,
-    {description = 'select previous', group = 'layout'}
-  ),
-  awful.key(
     {modkey, 'Control'},
     'n',
     function()
@@ -272,7 +241,7 @@ local globalKeys =
     {},
     'XF86MonBrightnessUp',
     function()
-      awful.spawn('xbacklight -inc 10')
+      awful.spawn('light -A 10')
     end,
     {description = '+10%', group = 'hotkeys'}
   ),
@@ -280,7 +249,7 @@ local globalKeys =
     {},
     'XF86MonBrightnessDown',
     function()
-      awful.spawn('xbacklight -dec 10')
+      awful.spawn('light -U 10')
     end,
     {description = '-10%', group = 'hotkeys'}
   ),
@@ -289,7 +258,7 @@ local globalKeys =
     {},
     'XF86AudioRaiseVolume',
     function()
-      awful.spawn('amixer -D pulse sset Master 5%+')
+      awful.spawn('amixer -c 0 sset Master 5%+')
     end,
     {description = 'volume up', group = 'hotkeys'}
   ),
@@ -297,7 +266,7 @@ local globalKeys =
     {},
     'XF86AudioLowerVolume',
     function()
-      awful.spawn('amixer -D pulse sset Master 5%-')
+      awful.spawn('amixer -c 0 sset Master 5%-')
     end,
     {description = 'volume down', group = 'hotkeys'}
   ),
@@ -305,23 +274,7 @@ local globalKeys =
     {},
     'XF86AudioMute',
     function()
-      awful.spawn('amixer -D pulse set Master 1+ toggle')
-    end,
-    {description = 'toggle mute', group = 'hotkeys'}
-  ),
-  awful.key(
-    {},
-    'XF86AudioNext',
-    function()
-      --
-    end,
-    {description = 'toggle mute', group = 'hotkeys'}
-  ),
-  awful.key(
-    {},
-    'XF86PowerDown',
-    function()
-      --
+      awful.spawn('amixer -c 0 set Master 1+ toggle')
     end,
     {description = 'toggle mute', group = 'hotkeys'}
   ),

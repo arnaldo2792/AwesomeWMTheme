@@ -15,12 +15,12 @@ local slider =
 slider:connect_signal(
   'property::value',
   function()
-    spawn('amixer -D pulse sset Master ' .. slider.value .. '%')
+    spawn('amixer -c 0 set Master ' .. slider.value .. '%')
   end
 )
 
 watch(
-  [[bash -c "amixer -D pulse sget Master"]],
+  [[bash -c "amixer -c 0 sget Master"]],
   1,
   function(_, stdout)
     local mute = string.match(stdout, '%[(o%D%D?)%]')
